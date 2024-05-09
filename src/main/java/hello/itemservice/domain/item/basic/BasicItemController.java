@@ -40,38 +40,19 @@ public class BasicItemController {
     }
 
     // 상품 추가
-//    @PostMapping("/add")ㅇㅇ
-//    public String addItemV1(@RequestParam String itemName,
-//                            @RequestParam int price,
-//                            @RequestParam Integer quantity,
-//                            Model model) {
-//        Item item = new Item();
-//        item.setItemName(itemName);
-//        item.setQuantity(quantity);
-//        item.setPrice(price);
-//
-//        itemRepository.save(item);
-//        model.addAttribute("item",item);
-//        return "basic/item";
-//    }
-
-    // ModelAttribute가 객체를 생성해준다
-//    @PostMapping("/add")
-//    public String addItemV2(@ModelAttribute Item item) {
-//        itemRepository.save(item);
-//        return "basic/item";
-//    }
-//
 
     /**
      * 상품 등록 폼
      * @ModelAttribute 생략가능
      * model.addAttribute(item) 자동생성
      */
+    // 새로고침 할 경우 계속해서 ItemId가 올라가기 때문에
+    // redirect를 사용해야 한다
+
     @PostMapping("/add")
-    public String addItemV3(Item item) {
+    public String add(Item item) {
         itemRepository.save(item);
-        return "basic/item";
+        return "redirect:/basic/items/" +item.getId();
     }
 
     // 상품 수정 폼
